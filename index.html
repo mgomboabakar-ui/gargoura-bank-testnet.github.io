@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gargoura Digital Bank V2 Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 50px; background: #28a745; color: white; }
+    button { padding: 15px 30px; font-size: 18px; background: white; color: #28a745; border: none; border-radius: 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Gargoura Digital Bank V2 Test</h1>
+  <p>Environnement de test - Sandbox</p>
+  <button id="auth">Se connecter avec Pi Test</button>
+  <p id="result"></p>
+
+  <script>
+    Pi.init({ version: "2.0", sandbox: true });
+    
+    document.getElementById('auth').onclick = function() {
+      document.getElementById('result').innerText = "Connexion en cours...";
+      Pi.authenticate(['username'], 
+        function onReady(auth) {
+          document.getElementById('result').innerText = "Connecté Test : " + auth.user.username;
+        }, 
+        function onError(error) {
+          document.getElementById('result').innerText = "Erreur : " + error;
+        }
+      );
+    }
+  </script>
+</body>
+</html>
